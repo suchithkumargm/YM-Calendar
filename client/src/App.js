@@ -3,10 +3,12 @@ import React from 'react';
 import Calendar from './components/calendar/Calendar.js';
 import './App.css';
 
-const App=()=> {
+const App = () => {
 
 	return (
-		<Calendar />
+		<div className='main'>
+			<Calendar />
+		</div>
 	);
 }
 

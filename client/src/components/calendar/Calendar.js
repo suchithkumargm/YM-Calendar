@@ -1,69 +1,101 @@
-import React, { useState } from 'react';
-import './Calendar.css'; // Import the CSS file
+import React, { Component } from 'react';
+import './Calendar.css';
 
-const Calendar = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(null);
+class YearlyCalendar extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentYear: 2023, // Initial year
+		};
+	}
 
-  const months = Array.from({ length: 12 }, (_, i) => i);
+	// Function to generate the calendar for a given year
+	generateCalendar(year) {
+		const months = [];
+		for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
+			const monthName = new Date(year, monthIndex, 1).toLocaleString('default', { month: 'long' });
+			const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+			const days = [];
 
-  const isSunday = (day) => day % 7 === 0;
+			let dayCounter = 1;
 
-  const renderMonth = (month) => {
-    const date = new Date(year, month, 1);
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const firstDayOfWeek = date.getDay();
+			for (let week = 0; week < 6; week++) {
+				const weekDays = [];
 
-    return (
-      <div className="month" key={month}>
-        <h2>{date.toLocaleString('default', { month: 'long' })}</h2>
-        <table>
-          <thead>
-            <tr>
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
-                <th key={index} className={isSunday(index) ? 'sunday' : ''}>
-                  {day}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {[...Array(firstDayOfWeek).fill(null), ...Array(daysInMonth).keys()].map((day) => (
-                <td
-                  key={day}
-                  className={isSunday(firstDayOfWeek + day) ? 'sunday' : ''}
-                  onClick={() => setSelectedMonth(month)}
-                >
-                  {day + 1}
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  };
+				for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+					if (week === 0 && dayOfWeek < new Date(year, monthIndex, 1).getDay()) {
+						weekDays.push(<td key={dayOfWeek} className="empty"></td>);
+					} else if (dayCounter <= daysInMonth) {
+						weekDays.push(
+							<td key={dayOfWeek} className={dayOfWeek === 0 ? "sunday" : ""}>
+								{dayCounter}
+							</td>
+						);
+						dayCounter++;
+					} else {
+						weekDays.push(<td key={dayOfWeek} className="empty"></td>);
+					}
+				}
 
-  return (
-    <div className="calendar">
-      <div className="year-selector">
-        <h1>{year}</h1>
-        <button onClick={() => setYear(year - 1)}>Previous Year</button>
-        <button onClick={() => setYear(year + 1)}>Next Year</button>
-      </div>
-      {!selectedMonth ? (
-        <div className="year-view">
-          {months.map((month) => renderMonth(month))}
-        </div>
-      ) : (
-        <div className="month-view">
-          {renderMonth(selectedMonth)}
-          <button onClick={() => setSelectedMonth(null)}>Back to Year View</button>
-        </div>
-      )}
-    </div>
-  );
-};
+				days.push(<tr key={week}>{weekDays}</tr>);
+			}
 
-export default Calendar;
+			months.push(
+				<div key={monthIndex} className="month">
+					<h2>{monthName}</h2>
+					<table>
+						<thead>
+							<tr>
+								{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((dayName, index) => (
+									<th key={index}>{dayName}</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>{days}</tbody>
+					</table>
+				</div>
+			);
+		}
+
+		return months;
+	}
+
+	// Button click event listeners
+	handlePrevYearClick = () => {
+		this.setState((prevState) => ({
+			currentYear: prevState.currentYear - 1,
+		}));
+	};
+
+	handleNextYearClick = () => {
+		this.setState((prevState) => ({
+			currentYear: prevState.currentYear + 1,
+		}));
+	};
+
+	render() {
+		const { currentYear } = this.state;
+		const months = this.generateCalendar(currentYear);
+
+		return (
+			<div className="calendar">
+				<div className='calendar-year'>
+					<h1>
+						<button id="prev-year" onClick={this.handlePrevYearClick}>
+							&lt;
+						</button>
+						<span id="year-display">{currentYear}</span>
+						<button id="next-year" onClick={this.handleNextYearClick}>
+							&gt;
+						</button>
+					</h1>
+				</div>
+				<div className="yearly-calendar" id="yearly-calendar">
+					{months}
+				</div>
+			</div>
+		);
+	}
+}
+
+export default YearlyCalendar;
