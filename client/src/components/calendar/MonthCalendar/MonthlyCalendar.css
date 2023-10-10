@@ -1,3 +1,17 @@
+.calender__monthly{
+  font-weight: 700;
+  width: 78.5%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+}
+
 .calendar-month {
     font-weight: 700;
     width: 78.5%;

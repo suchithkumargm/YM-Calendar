@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import YearCalendar from './YearCalendar/YearCalendar.js';
 import MonthlyCalendar from './MonthCalendar/MonthlyCalendar.js';
-// import './Calendar.css';
+import './Calendar.css';
 
 const Calendar = () => {
-    const [selectedOption, setSelectedOption] = useState('thisMonth'); // Set the initial state to "thisMonth"
+    const [selectedOption, setSelectedOption] = useState('thisYear'); // Set the initial state to "thisMonth"
 
     // Function to handle option change
     const handleOptionChange = (event) => {
@@ -22,7 +22,7 @@ const Calendar = () => {
     };
 
     return (
-        <div className="calendar">
+        <div className='main-calendar'>
             <h1>Select an Option:</h1>
             <select value={selectedOption} onChange={handleOptionChange}>
                 <option value="thisYear">This Year</option>

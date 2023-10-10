@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Calendar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Add left and right arrow buttons -->
-    <button id="prevMonthBtn">&lt; Prev</button>
-    <button id="nextMonthBtn">Next &gt;</button>
 
+<body>
+    <div class="navigation">
+        <div class="navigation-year">
+            <button id="prevYearBtn">&lt;</button>
+            <span id="year-display">2023</span>
+            <button id="nextYearBtn">&gt;</button>
+        </div>
+        <div class="navigation-month">
+            <button id="prevMonthBtn">&lt;</button>
+            <span id="month-display">October</span>
+            <button id="nextMonthBtn">&gt;</button>
+        </div>
+    </div>
     <div id="calendar-container">
         <!-- Calendar will be generated here -->
     </div>
-
     <script src="script.js"></script>
 </body>
+
 </html>

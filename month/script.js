@@ -1,9 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   const calendarContainer = document.getElementById("calendar-container");
+  const prevYearBtn = document.getElementById("prevYearBtn");
+  const nextYearBtn = document.getElementById("nextYearBtn");
   const prevMonthBtn = document.getElementById("prevMonthBtn");
   const nextMonthBtn = document.getElementById("nextMonthBtn");
+  const yearDisplay = document.getElementById("year-display");
+  const monthDisplay = document.getElementById("month-display");
 
   let currentDate = new Date(); // Initialize with the current date
+  let currentYear = currentDate.getFullYear();
   let currentMonthIndex = currentDate.getMonth();
 
   function generateCalendar(monthIndex, year) {
@@ -20,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const monthName = monthNames[currentMonth];
 
-      let calendarHTML = `<h2>${monthName} ${currentYear}</h2><table><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr>`;
+      let calendarHTML = `<table><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr>`;
 
       // Add empty cells for days before the first day of the month
       for (let i = 0; i < firstDayIndex; i++) {
@@ -41,18 +46,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
       calendarHTML += "</tr></table>";
       calendarContainer.innerHTML = calendarHTML;
+      yearDisplay.textContent = currentYear;
+      monthDisplay.textContent = monthName;
   }
 
   generateCalendar(currentMonthIndex);
+
+  function showPrevYear() {
+      currentYear--;
+      generateCalendar(currentMonthIndex, currentYear);
+  }
+
+  function showNextYear() {
+      currentYear++;
+      generateCalendar(currentMonthIndex, currentYear);
+  }
 
   function showPrevMonth() {
       if (currentMonthIndex > 0) {
           currentMonthIndex--;
       } else {
           currentMonthIndex = 11;
-          currentDate.setFullYear(currentDate.getFullYear() - 1); // Move to the previous year
+          currentYear--;
       }
-      generateCalendar(currentMonthIndex, currentDate.getFullYear());
+      generateCalendar(currentMonthIndex, currentYear);
   }
 
   function showNextMonth() {
@@ -60,11 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
           currentMonthIndex++;
       } else {
           currentMonthIndex = 0;
-          currentDate.setFullYear(currentDate.getFullYear() + 1); // Move to the next year
+          currentYear++;
       }
-      generateCalendar(currentMonthIndex, currentDate.getFullYear());
+      generateCalendar(currentMonthIndex, currentYear);
   }
 
+  prevYearBtn.addEventListener("click", showPrevYear);
+  nextYearBtn.addEventListener("click", showNextYear);
   prevMonthBtn.addEventListener("click", showPrevMonth);
   nextMonthBtn.addEventListener("click", showNextMonth);
 });

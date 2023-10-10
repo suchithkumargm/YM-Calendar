@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: gray;
+    background-color: #1F1F1F;
 }
 
 table {
@@ -12,7 +12,7 @@ table {
 }
 
 table th {
-    color: yellow;
+    color: #FFBB00;
     font-size: 18px;
     padding: 10px;
 }
@@ -23,5 +23,15 @@ table td {
 }
 
 table .sunday {
-    color: red; /* Make Sundays red in color */
+    color: #FF0000;
+}
+
+.navigation{
+    display: flex;
+    justify-content: space-between;
+}
+
+button{
+    background-color: #1F1F1F;
+    color: white;
 }
