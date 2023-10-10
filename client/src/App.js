@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Calendar from './components/calendar/Calendar.js';
+import YearCalendar from './components/calendar/YearCalendar/YearCalendar.js';
 import './App.css';
 
 const App = () => {
 
 	return (
 		<div className='main'>
-			<Calendar />
+			<YearCalendar />
 		</div>
 	);
 }
