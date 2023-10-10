@@ -1,0 +1,84 @@
+.calendar {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .year-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .year-selector h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .year-selector button {
+    margin: 0 10px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .year-selector button:hover {
+    background-color: #005a9c;
+  }
+  
+  .year-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .month {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+  }
+  
+  .month h2 {
+    background-color: #007acc;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  table th {
+    background-color: #f2f2f2;
+    padding: 5px;
+  }
+  
+  table td {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  table td.sunday {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .month-view button {
+    margin-top: 20px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .month-view button:hover {
+    background-color: #005a9c;
+  }
+  

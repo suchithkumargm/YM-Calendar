@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #353535;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calendar {
+    background-color: (0, 0, 0);
+    text-align: center;
+    padding: 20px;
+    max-width: 100%; /* Ensure the calendar fits within the screen */
+}
+
+h1 {
+    font-size: 1.5rem; /* Adjust the font size to fit */
+    margin-bottom: 10px;
+}
+
+.yearly-calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px; /* Adjust the gap between months */
+    max-width: 100%; /* Ensure the calendar grid fits within the screen */
+}
+
+.month {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.month h2 {
+    font-size: 1rem; /* Adjust the font size to fit */
+    margin: 5px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+
+th {
+    color: #ffbb00;
+    font-weight: bold;
+}
+
+.nav-buttons {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Add this CSS class to style Sundays */
+.sunday {
+    color: red;
+}
