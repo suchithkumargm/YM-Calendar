@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color: gray;
 }
 
 table {
@@ -11,18 +12,16 @@ table {
 }
 
 table th {
-    background-color: #007acc;
-    color: white;
+    color: yellow;
     font-size: 18px;
     padding: 10px;
 }
 
 table td {
-    border: 1px solid #ccc;
     padding: 10px;
-    cursor: pointer;
+    color: white;
 }
 
 table .sunday {
-    color: red;
+    color: red; /* Make Sundays red in color */
 }

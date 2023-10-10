@@ -71,3 +71,8 @@ th {
 .sunday {
   color: var(--red-color);
 }
+
+#today-date {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
