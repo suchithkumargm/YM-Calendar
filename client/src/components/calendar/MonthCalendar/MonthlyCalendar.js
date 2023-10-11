@@ -1,107 +1,117 @@
 import React, { useState } from 'react';
-
-
-import { format, isSameDay} from 'date-fns'; // Import date-fns functions
+import './MonthlyCalendar.css';
 
 const MonthlyCalendar = () => {
-	const [currentDate, setCurrentDate] = useState(new Date()); // Initial date (current date)
+	const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+	const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth());
 
-	// Function to generate the calendar for a given month
-	const generateCalendar = (date) => {
-		const year = date.getFullYear();
-		const month = date.getMonth();
-		const monthName = date.toLocaleString('default', { month: 'long' });
-		const daysInMonth = new Date(year, month + 1, 0).getDate();
-		const days = [];
+	const monthNames = [
+		"January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November", "December"
+	];
 
-		let dayCounter = 1;
+	const showPrevYear = () => {
+		setCurrentYear(currentYear - 1);
+	}
 
-		// Find the first day of the month
-		const firstDayOfMonth = new Date(year, month, 1).getDay();
+	const showNextYear = () => {
+		setCurrentYear(currentYear + 1);
+	}
 
-		for (let week = 0; week < 6; week++) {
-			const weekDays = [];
-
-			for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
-				if (week === 0 && dayOfWeek < firstDayOfMonth) {
-					weekDays.push(<td key={dayOfWeek} className="empty"></td>);
-				} else if (dayCounter <= daysInMonth) {
-					const currentDateOfMonth = new Date(year, month, dayCounter);
-
-					// Check if the current date is the same as the date being rendered
-					const isCurrentDate = isSameDay(currentDateOfMonth, currentDate);
-
-					// Apply yellow color to the current date
-					const dayStyle = isCurrentDate ? { color: 'yellow' } : {};
-
-					weekDays.push(
-						<td
-							key={dayOfWeek}
-							className={dayOfWeek === 0 ? "sunday" : ""}
-							style={dayStyle}
-						>
-							{dayCounter}
-						</td>
-					);
-					dayCounter++;
-				} else {
-					weekDays.push(<td key={dayOfWeek} className="empty"></td>);
-				}
-			}
-
-			days.push(<tr key={week}>{weekDays}</tr>);
+	const showPrevMonth = () => {
+		if (currentMonthIndex > 0) {
+			setCurrentMonthIndex(currentMonthIndex - 1);
+		} else {
+			setCurrentMonthIndex(11);
+			setCurrentYear(currentYear - 1);
 		}
+	}
 
+	const showNextMonth = () => {
+		if (currentMonthIndex < 11) {
+			setCurrentMonthIndex(currentMonthIndex + 1);
+		} else {
+			setCurrentMonthIndex(0);
+			setCurrentYear(currentYear + 1);
+		}
+	}
+
+	const generateCalendar = () => {
+		const currentMonth = currentMonthIndex;
+		const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+		const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
+		const monthName = monthNames[currentMonth];
+	  
+		const calendarRows = [];
+		let dayCells = [];
+	  
+		// Add empty cells for days before the first day of the month
+		for (let i = 0; i < firstDayIndex; i++) {
+		  dayCells.push(<td key={i}></td>);
+		}
+	  
+		for (let day = 1; day <= daysInMonth; day++) {
+		  dayCells.push(
+			<td key={day} className={day % 7 === 0 ? "sunday" : ""}>
+			  {day}
+			</td>
+		  );
+	  
+		  if ((firstDayIndex + day) % 7 === 0) {
+			calendarRows.push(<tr key={day}>{dayCells}</tr>);
+			dayCells = [];
+		  }
+		}
+	  
+		if (dayCells.length > 0) {
+		  // Fill in remaining cells for the last row
+		  while (dayCells.length < 7) {
+			dayCells.push(<td key={dayCells.length}></td>);
+		  }
+		  calendarRows.push(<tr key="last">{dayCells}</tr>);
+		}
+	  
 		return (
-			<div className="month">
-				<h2>{monthName}</h2>
-				<table>
-					<thead>
-						<tr>
-							{['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((dayName, index) => (
-								<th key={index}>{dayName}</th>
-							))}
-						</tr>
-					</thead>
-					<tbody>{days}</tbody>
-				</table>
+		  <div className="month-calendar-container">
+			<div className="navigation">
+			  <div className="navigation-year">
+				<button onClick={showPrevYear}>&lt;</button>
+				<span id="year-display">{currentYear}</span>
+				<button onClick={showNextYear}>&gt;</button>
+			  </div>
+			  <div className="navigation-month">
+				<button onClick={showPrevMonth}>&lt;</button>
+				<span id="month-display">{monthName}</span>
+				<button onClick={showNextMonth}>&gt;</button>
+			  </div>
 			</div>
+			<table>
+			  <thead>
+				<tr>
+				  <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				{calendarRows}
+			  </tbody>
+			</table>
+		  </div>
 		);
-	};
-
-	// Button click event listeners
-	const handlePrevMonthClick = () => {
-		const prevMonth = new Date(currentDate);
-		prevMonth.setMonth(prevMonth.getMonth() - 1);
-		setCurrentDate(prevMonth);
-	};
-
-	const handleNextMonthClick = () => {
-		const nextMonth = new Date(currentDate);
-		nextMonth.setMonth(nextMonth.getMonth() + 1);
-		setCurrentDate(nextMonth);
-	};
-
-	const monthCalendar = generateCalendar(currentDate);
+	  }
+	  
 
 	return (
-		<div className="calendar__monthly">
-			<div className='calendar-month'>
-				<h1>
-					<button id="prev-month" onClick={handlePrevMonthClick}>
-						&lt;
-					</button>
-					<span id="month-display">{format(currentDate, 'yyyy')}</span>
-					<button id="next-month" onClick={handleNextMonthClick}>
-						&gt;
-					</button>
-				</h1>
-			</div>
-			<div className="monthly-calendar" id="monthly-calendar">
-				{monthCalendar}
+		<div className="inner-month-container">
+			{/* <div className="calendar-container"> */}
+			{generateCalendar()}
+			{/* </div> */}
+			<hr />
+			<div className="event-container">
+				<div className="date-and-day">selected day and date</div>
+				<div className="event-name">event</div>
 			</div>
 		</div>
 	);
-};
+}
 
 export default MonthlyCalendar;

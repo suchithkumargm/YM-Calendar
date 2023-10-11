@@ -18,7 +18,7 @@ const YearlyCalendar = () => {
 	const months = generateYearCalendar(currentYear);
 
 	return (
-		<div className="calendar__yearly">
+		<div className="inner-container">
 			<div className='calendar-year'>
 				<h1>
 					<button id="prev-year" onClick={handlePrevYearClick}>
