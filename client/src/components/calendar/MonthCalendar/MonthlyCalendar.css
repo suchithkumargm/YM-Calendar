@@ -113,3 +113,8 @@ hr {
 .event-name{
   font-weight: 300;
 }
+
+.holiday:not(.sunday){
+  background-color: var(--red-color);
+  border-radius: 50%;
+}

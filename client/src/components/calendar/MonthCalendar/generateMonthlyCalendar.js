@@ -8,15 +8,41 @@ const GenerateMonthlyCalendar = (props) => {
         showNextYear,
         showPrevMonth,
         showNextMonth,
-        monthNames
+        monthNames,
+        holidays,
     } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [activeDate, setActiveDate] = useState(new Date());
+    const [isHolidayState, setIsHolidayState] = useState(false);
 
     const handleDateClick = (day, month, year) => {
         const newSelectedDate = new Date(year, month, day);
         setSelectedDate(newSelectedDate);
+
+        // Send a POST request to check if it's a holiday
+        fetch('http://localhost:5000/calender/checkholiday', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                date: newSelectedDate.toISOString().split('T')[0], // Format as 'yyyy-mm-dd'
+                typeOfHoliday: 'yet to be decided',
+                holidayName: 'holiday',
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setIsHolidayState(data.workingDay);
+            })
+            .catch((error) => {
+                console.error('Error while checking holiday:', error);
+            });
+    }
+
+    const isHoliday = (day, month, year) => {
+        const formattedDate = `${year}-${month +1}-${day}`;
+        return holidays.includes(formattedDate);
     }
 
     const currentMonth = currentMonthIndex;
@@ -33,7 +59,7 @@ const GenerateMonthlyCalendar = (props) => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-        const dayOfWeek = (firstDayIndex + day - 1) % 7;
+        const dayOfWeek = (firstDayIndex + day -1) % 7;
         const isSunday = dayOfWeek === 0;
         const isToday = currentDate.getDate() === today.getDate() && currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
         const isSelected = currentDate.toDateString() === selectedDate.toDateString();
@@ -45,7 +71,7 @@ const GenerateMonthlyCalendar = (props) => {
         dayCells.push(
             <td
                 key={day}
-                className={`${tdClass} ${selectedTdClass}`}
+                className={`${tdClass} ${selectedTdClass} ${isHoliday(day, currentMonth, currentYear) ? 'holiday' : ''}`}
                 id={tdId}
                 onClick={() => handleDateClick(day, currentMonth, currentYear)}
             >
@@ -68,7 +94,7 @@ const GenerateMonthlyCalendar = (props) => {
         calendarRows.push(<tr key="last">{dayCells}</tr>);
     }
 
-    const formattedSelectedDate = `${selectedDate.toLocaleString('en-us', { weekday: 'long' })} ${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
+    const formattedSelectedDate = `${selectedDate.toLocaleString('en-in', { weekday: 'long' })} ${selectedDate.getDate()}/${selectedDate.getMonth() + 1}/${selectedDate.getFullYear()}`;
 
     return (
         <>
@@ -96,7 +122,7 @@ const GenerateMonthlyCalendar = (props) => {
                     </tbody>
                 </table>
             </div>
-            <hr/>
+            <hr />
             <div className="event-container">
                 <div className="date-and-day">{formattedSelectedDate}</div>
                 <div className="event-name">No Events</div>
