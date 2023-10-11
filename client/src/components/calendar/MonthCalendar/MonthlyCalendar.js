@@ -1,8 +1,7 @@
-// MonthlyCalendar.js
 import React, { useState, useEffect } from 'react';
 
-import GenerateMonthlyCalendar from './generateMonthlyCalendar.js';
-import './MonthlyCalendar.css'
+import GenerateMonthlyCalendar from './generateMonthlyCalendar';
+import './MonthlyCalendar.css';
 
 const MonthlyCalendar = () => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -38,8 +37,6 @@ const MonthlyCalendar = () => {
         }
     }
 
-    const [holidays, setHolidays] = useState([]);
-
     useEffect(() => {
         // Fetch the list of holidays from the server
         fetch('http://localhost:5000/calendar/getholidays')
@@ -52,6 +49,13 @@ const MonthlyCalendar = () => {
             });
     }, []);
 
+    const [holidays, setHolidays] = useState([]);
+
+    const updateHolidays = (newHoliday) => {
+        // Clone the current holidays state and add the new holiday
+        setHolidays([...holidays, newHoliday]);
+    }
+
     return (
         <div className="inner-month-container">
             <GenerateMonthlyCalendar
@@ -63,6 +67,7 @@ const MonthlyCalendar = () => {
                 showNextMonth={showNextMonth}
                 monthNames={monthNames}
                 holidays={holidays}
+                updateHolidays={updateHolidays}
             />
         </div>
     );

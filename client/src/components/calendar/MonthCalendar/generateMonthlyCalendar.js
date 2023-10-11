@@ -10,17 +10,18 @@ const GenerateMonthlyCalendar = (props) => {
         showNextMonth,
         monthNames,
         holidays,
+        updateHolidays,
     } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [isHolidayState, setIsHolidayState] = useState(false);
 
     const handleDateClick = (day, month, year) => {
-        const newSelectedDate = new Date(Date.UTC(year, month, day)); // Create a UTC date
+        const newSelectedDate = new Date(Date.UTC(year, month, day));
         setSelectedDate(newSelectedDate);
-    
+
         const formattedDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
-    
+
         // Send a POST request to check if it's a holiday
         fetch('http://localhost:5000/calendar/checkholiday', {
             method: 'POST',
@@ -28,7 +29,7 @@ const GenerateMonthlyCalendar = (props) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                date: formattedDate, // Format as 'yyyy-mm-dd'
+                date: formattedDate,
                 typeOfHoliday: 'yet to be decided',
                 holidayName: 'holiday',
             }),
@@ -36,6 +37,10 @@ const GenerateMonthlyCalendar = (props) => {
             .then((response) => response.json())
             .then((data) => {
                 setIsHolidayState(data.workingDay);
+                if (!data.workingDay) {
+                    // If it's a holiday, call the updateHolidays function
+                    updateHolidays(formattedDate);
+                }
             })
             .catch((error) => {
                 console.error('Error while checking holiday:', error);
@@ -43,7 +48,7 @@ const GenerateMonthlyCalendar = (props) => {
     }
 
     const isHoliday = (day, month, year) => {
-        const formattedDate = `${year}-${month + 1}-${day}`;
+        const formattedDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
         return holidays.includes(formattedDate);
     }
 
