@@ -9,7 +9,7 @@ const port = 5000;
 app.use(cors());    //cors origin resource sharing
 app.use(express.json());
 
-app.use('/calender', calender);
+app.use('/calendar', calender);
 
 app.listen(port, () => {
     console.log(`server started on http://localhost:${port}`);

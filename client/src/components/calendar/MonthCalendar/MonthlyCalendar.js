@@ -42,7 +42,7 @@ const MonthlyCalendar = () => {
 
     useEffect(() => {
         // Fetch the list of holidays from the server
-        fetch('http://localhost:5000/calender/getholidays')
+        fetch('http://localhost:5000/calendar/getholidays')
             .then((response) => response.json())
             .then((data) => {
                 setHolidays(data);

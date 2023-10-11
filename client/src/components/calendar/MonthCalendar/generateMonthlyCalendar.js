@@ -16,17 +16,19 @@ const GenerateMonthlyCalendar = (props) => {
     const [isHolidayState, setIsHolidayState] = useState(false);
 
     const handleDateClick = (day, month, year) => {
-        const newSelectedDate = new Date(year, month, day);
+        const newSelectedDate = new Date(Date.UTC(year, month, day)); // Create a UTC date
         setSelectedDate(newSelectedDate);
-
+    
+        const formattedDate = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    
         // Send a POST request to check if it's a holiday
-        fetch('http://localhost:5000/calender/checkholiday', {
+        fetch('http://localhost:5000/calendar/checkholiday', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                date: newSelectedDate.toISOString().split('T')[0], // Format as 'yyyy-mm-dd'
+                date: formattedDate, // Format as 'yyyy-mm-dd'
                 typeOfHoliday: 'yet to be decided',
                 holidayName: 'holiday',
             }),
@@ -41,7 +43,7 @@ const GenerateMonthlyCalendar = (props) => {
     }
 
     const isHoliday = (day, month, year) => {
-        const formattedDate = `${year}-${month +1}-${day}`;
+        const formattedDate = `${year}-${month + 1}-${day}`;
         return holidays.includes(formattedDate);
     }
 
@@ -59,7 +61,7 @@ const GenerateMonthlyCalendar = (props) => {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-        const dayOfWeek = (firstDayIndex + day -1) % 7;
+        const dayOfWeek = (firstDayIndex + day - 1) % 7;
         const isSunday = dayOfWeek === 0;
         const isToday = currentDate.getDate() === today.getDate() && currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
         const isSelected = currentDate.toDateString() === selectedDate.toDateString();
