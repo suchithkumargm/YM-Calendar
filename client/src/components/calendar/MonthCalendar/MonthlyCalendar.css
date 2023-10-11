@@ -85,3 +85,9 @@ hr {
 .event-container {
   margin-top: 5rem;
 }
+
+#today-month-date{
+  text-align: center;
+  outline: 2px solid var(--primary-color);
+  outline-offset: -1.4rem;
+}
