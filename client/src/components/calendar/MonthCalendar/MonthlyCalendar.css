@@ -52,11 +52,19 @@
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+cursor: pointer;
+}
 
+table td:hover{
+  color: #c4c4c4;
 }
 
 .month-calendar-container table .sunday {
-  color: #FF0000;
+  color: var(--red-color);
+}
+
+.month-calendar-container table .sunday:hover {
+  color: #ff3e3e;
 }
 
 .navigation {
@@ -82,12 +90,26 @@ hr {
   margin: auto 2rem;
 }
 
-.event-container {
-  margin-top: 5rem;
-}
-
 #today-month-date{
   text-align: center;
   outline: 2px solid var(--primary-color);
   outline-offset: -1.4rem;
+}
+
+
+.event-container {
+  width: 45%;
+  margin-top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-and-day{
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.event-name{
+  font-weight: 300;
 }
