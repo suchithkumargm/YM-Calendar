@@ -20,13 +20,13 @@
 .month-calendar-container .navigation {
   display: flex;
   margin: 1rem 2rem;
-  font-size: 24px;
-  line-height: 27.6px;
+  font-size: 1.5rem;
+  line-height: 1.725rem;
 }
 
 .month-calendar-container .navigation button {
-  font-size: 24px;
-  line-height: 27.6px;
+  font-size: 1.5rem;
+  line-height: 1.725rem;
 }
 
 .month-calendar-container table {
@@ -38,8 +38,8 @@
 
 .month-calendar-container table th {
   color: #FFBB00;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   letter-spacing: 0em;
   text-align: left;
   text-transform: uppercase;
@@ -48,8 +48,8 @@
 .month-calendar-container table td {
   padding: 1.5rem;
   color: white;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   letter-spacing: 0em;
   text-align: left;
 cursor: pointer;
@@ -114,7 +114,14 @@ hr {
   font-weight: 300;
 }
 
-.holiday:not(.sunday){
+.holiday:not(.sunday) span{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--red-color);
   border-radius: 50%;
+}
+
+.holiday.sunday{
+  color: var(--white-color) !important;
 }

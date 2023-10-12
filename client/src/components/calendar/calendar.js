@@ -23,7 +23,6 @@ const Calendar = () => {
 
     return (
         <div className='main-calendar'>
-            <h1>Select an Option:</h1>
             <select value={selectedOption} onChange={handleOptionChange}>
                 <option value="thisYear">This Year</option>
                 <option value="thisMonth">This Month</option>
