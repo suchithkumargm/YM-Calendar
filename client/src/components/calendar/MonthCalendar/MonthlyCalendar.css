@@ -2,7 +2,7 @@
   font-weight: 700;
   width: 78.5%;
   height: 90%;
-  
+
   display: flex;
   flex-direction: row;
 
@@ -52,19 +52,11 @@
   line-height: 1.75rem;
   letter-spacing: 0em;
   text-align: left;
-cursor: pointer;
-}
-
-table td:hover{
-  color: #c4c4c4;
+  cursor: pointer;
 }
 
 .month-calendar-container table .sunday {
   color: var(--red-color);
-}
-
-.month-calendar-container table .sunday:hover {
-  color: #ff3e3e;
 }
 
 .navigation {
@@ -90,7 +82,7 @@ hr {
   margin: auto 2rem;
 }
 
-#today-month-date{
+#today-month-date {
   text-align: center;
   outline: 2px solid var(--primary-color);
   outline-offset: -1.4rem;
@@ -105,23 +97,26 @@ hr {
   align-items: center;
 }
 
-.date-and-day{
+.date-and-day {
   color: var(--primary-color);
   margin-bottom: 2rem;
 }
 
-.event-name{
+.event-name {
   font-weight: 300;
 }
 
-.holiday:not(.sunday) span{
+span#day {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.holiday:not(.sunday) span {
   background-color: var(--red-color);
   border-radius: 50%;
 }
 
-.holiday.sunday{
+.holiday.sunday {
   color: var(--white-color) !important;
 }
