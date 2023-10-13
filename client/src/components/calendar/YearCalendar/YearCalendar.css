@@ -1,91 +1,136 @@
 .inner-container {
-  font-weight: 700;
-  width: 78.5%;
-  height: 90%;
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	font-weight: 700;
+	width: 78.5%;
+	height: 90%;
 
-  background-color: var(--secondary-color);
-  color: var(--white-color);
-  border: 1px solid var(--primary-color);
-  border-radius: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--secondary-color);
+	color: var(--white-color);
+	border: 1px solid var(--primary-color);
+	border-radius: 20px;
 }
 
 h1 {
-  margin-top: 0;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 2.0rem;
-  letter-spacing: 0em;
+	margin-top: 0;
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 2.0rem;
+	letter-spacing: 0em;
 }
 
 h1 button {
-  background-color: var(--secondary-color);
-  color: var(--white-color);
-  border: none;
-  margin:0 0.5rem;
-  cursor: pointer;
-  font-size: 1.6rem;
-  font-weight: 700;
+	background-color: var(--secondary-color);
+	color: var(--white-color);
+	border: none;
+	margin: 0 0.5rem;
+	cursor: pointer;
+	font-size: 1.6rem;
+	font-weight: 700;
+}
+.top-head{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 }
 
-.filter{
-  position: relative;
-  top: -1rem;
-  left: 28rem;
+.filter {
+	position: relative;
+	margin-right: 1rem;
 }
 
-.calendar-year{
-  display: flex;
-  justify-content: space-between;
+.calendar-year {
+	margin-left: 45%;
 }
 
 .yearly-calendar {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-  grid-template-rows: repeat(3, 1fr);
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+	grid-template-rows: repeat(3, 1fr);
 }
 
-.month{
-  margin: 0 2rem;
+.month {
+	margin: 0 2rem;
 }
 
 .month h2 {
-  margin-left: 0.6rem;
-  margin-top: 0;
-  margin-bottom: 0.1rem;
-  font-size: 1.0rem;
-  line-height: 1rem;
-  letter-spacing: 0em;
+	margin-left: 0.6rem;
+	margin-top: 0;
+	margin-bottom: 0.1rem;
+	font-size: 1.0rem;
+	line-height: 1rem;
+	letter-spacing: 0em;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 th,
 td {
-  text-align: center;
-  padding: 0.3rem;
-  font-size: 0.6rem;
-  line-height: 0.685rem;
-  letter-spacing: 0em;
+	text-align: center;
+	padding: 0.3rem;
+	font-size: 0.6rem;
+	line-height: 0.685rem;
+	letter-spacing: 0em;
 }
 
 th {
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .sunday {
-  color: var(--red-color);
+	color: var(--red-color);
 }
 
 #today-date {
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+	color: var(--primary-color);
+	border: 1px solid var(--primary-color);
+}
+
+@media (max-width: 1000px) {
+	.inner-container {
+		height: auto;
+	}
+
+	.yearly-calendar {
+		grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+	}
+
+	.month h2 {
+		font-size: 1rem;
+	}
+	.filter{
+		position: inherit;
+	}
+}
+
+@media (max-width: 900px) {
+	.inner-container {
+		width: 90%;
+	}
+
+	.yearly-calendar {
+		grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+	}
+
+	.month h2 {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.inner-container {
+		width: 90%;
+	}
+
+	.yearly-calendar {
+		grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+	}
+
 }

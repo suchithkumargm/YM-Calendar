@@ -4,3 +4,21 @@
     background-color: var(--black-color);
     height: 100vh;
 }
+
+@media (max-width: 1000px) {
+    .main{
+        height: auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .main{
+        height: auto;
+    }
+}
+
+@media (max-width:500px) {
+	.main{
+        width: 100vh;
+    }
+}

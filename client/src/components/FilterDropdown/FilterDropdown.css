@@ -2,12 +2,12 @@
     cursor: pointer;
     background-color: var(--primary-color);
     color: var(--black-color);
-    height: 20px;
-    width: 115px;
+    height: 1.25rem;
+    width: 7.2rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
+    padding: 0.625rem;
     border-radius: 5px;
 }
 
@@ -28,9 +28,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 20px;
-    width: 115px;
-    padding: 10px;
+    height: 1.25rem;
+    width: 7.2rem;
+    padding: 0.625rem;
     text-decoration: none;
     color: var(--black-color);
     background-color: var(--white-color);

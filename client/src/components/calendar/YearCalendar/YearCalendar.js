@@ -20,19 +20,21 @@ const YearlyCalendar = ({ handleOptionChange }) => {
 
 	return (
 		<div className='inner-container'>
-			<div className='calendar-year'>
-				<h1>
-					<button id="prev-year" onClick={handlePrevYearClick}>
-						&lt;
-					</button>
-					<span id="year-display">{currentYear}</span>
-					<button id="next-year" onClick={handleNextYearClick}>
-						&gt;
-					</button>
-				</h1>
-			</div>
-			<div className='filter' >
-				<FilterDropdown handleOptionChange={handleOptionChange} />
+			<div className='top-head'>
+				<div className='calendar-year'>
+					<h1>
+						<button id="prev-year" onClick={handlePrevYearClick}>
+							&lt;
+						</button>
+						<span id="year-display">{currentYear}</span>
+						<button id="next-year" onClick={handleNextYearClick}>
+							&gt;
+						</button>
+					</h1>
+				</div>
+				<div className='filter' >
+					<FilterDropdown handleOptionChange={handleOptionChange} />
+				</div>
 			</div>
 			<div className="yearly-calendar" id="yearly-calendar">
 				{months}
