@@ -1,7 +1,7 @@
 import { isSameDay } from 'date-fns'; // Import date-fns functions
 
 // Function to generate the calendar for a given year
-const generateYearCalendar = (year) => {
+const GenerateYearCalendar = (year) => {
     const months = [];
     const currentDate = new Date(); // Get the current date
 
@@ -61,4 +61,4 @@ const generateYearCalendar = (year) => {
     return months;
 };
 
-export default generateYearCalendar;
+export default GenerateYearCalendar;

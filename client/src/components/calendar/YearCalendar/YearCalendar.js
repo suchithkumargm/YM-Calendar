@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import GenerateYearCalendar from './generateYearCalendar.js';
+import GenerateYearCalendar from './GenerateYearCalendar.js';
 import FilterDropdown from '../../FilterDropdown/FilterDropdown.js';
 import './YearCalendar.css';
 
