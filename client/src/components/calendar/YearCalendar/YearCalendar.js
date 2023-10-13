@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-import generateYearCalendar from './generateYearCalendar';
+import GenerateYearCalendar from './generateYearCalendar.js';
+import FilterDropdown from '../../FilterDropdown/FilterDropdown.js';
 import './YearCalendar.css';
 
-const YearlyCalendar = () => {
+const YearlyCalendar = ({ handleOptionChange }) => {
 	const [currentYear, setCurrentYear] = useState(2023); // Initial year
 
 	// Button click event listeners
@@ -15,10 +16,10 @@ const YearlyCalendar = () => {
 		setCurrentYear(currentYear + 1);
 	};
 
-	const months = generateYearCalendar(currentYear);
+	const months = GenerateYearCalendar(currentYear);
 
 	return (
-		<div className="inner-container">
+		<div className='inner-container'>
 			<div className='calendar-year'>
 				<h1>
 					<button id="prev-year" onClick={handlePrevYearClick}>
@@ -29,6 +30,9 @@ const YearlyCalendar = () => {
 						&gt;
 					</button>
 				</h1>
+			</div>
+			<div className='filter' >
+				<FilterDropdown handleOptionChange={handleOptionChange} />
 			</div>
 			<div className="yearly-calendar" id="yearly-calendar">
 				{months}

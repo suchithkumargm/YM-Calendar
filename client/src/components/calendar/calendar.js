@@ -5,29 +5,27 @@ import MonthlyCalendar from './MonthCalendar/MonthlyCalendar.js';
 import './Calendar.css';
 
 const Calendar = () => {
-    const [selectedOption, setSelectedOption] = useState('thisYear'); // Set the initial state to "thisMonth"
+    const [selectedOption, setSelectedOption] = useState('This Year'); // Set the initial state to "thisMonth"
 
     // Function to handle option change
     const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
+        setSelectedOption(event.target.textContent);
     };
 
     // Render the selected component based on the selectedOption
     const renderSelectedComponent = () => {
-        if (selectedOption === 'thisYear') {
-            return <YearCalendar />;
-        } else if (selectedOption === 'thisMonth') {
-            return <MonthlyCalendar />;
+        if (selectedOption === 'This Year') {
+            return <YearCalendar handleOptionChange={handleOptionChange}/>;
+        } else if (selectedOption === 'This Month') {
+            return <MonthlyCalendar handleOptionChange={handleOptionChange}/>;
         }
     };
 
     return (
         <div className='main-calendar'>
-            <select value={selectedOption} onChange={handleOptionChange}>
-                <option value="thisYear">This Year</option>
-                <option value="thisMonth">This Month</option>
-            </select>
-            {renderSelectedComponent()}
+            {/* <div className='inner-container'> */}
+                {renderSelectedComponent()}
+            {/* </div> */}
         </div>
     );
 };

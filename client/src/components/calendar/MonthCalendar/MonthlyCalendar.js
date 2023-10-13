@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 import GenerateMonthlyCalendar from './GenerateMonthlyCalendar';
+
 import './MonthlyCalendar.css';
 
-const MonthlyCalendar = () => {
+const MonthlyCalendar = ({ handleOptionChange }) => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
     const [currentMonthIndex, setCurrentMonthIndex] = useState(new Date().getMonth());
     const monthNames = [
@@ -62,6 +63,7 @@ const MonthlyCalendar = () => {
 
     return (
         <div className="inner-month-container">
+            
             <GenerateMonthlyCalendar
                 currentYear={currentYear}
                 currentMonthIndex={currentMonthIndex}
@@ -73,6 +75,7 @@ const MonthlyCalendar = () => {
                 holidays={holidays}
                 updateHolidays={updateHolidays}
                 handleButtonClick={handleButtonClick}
+                handleOptionChange={handleOptionChange}
             />
         </div>
     );

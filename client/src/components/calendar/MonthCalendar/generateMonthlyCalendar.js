@@ -1,4 +1,7 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
+
+
+import FilterDropdown from '../../FilterDropdown/FilterDropdown.js';
 
 const GenerateMonthlyCalendar = (props) => {
     const {
@@ -11,7 +14,8 @@ const GenerateMonthlyCalendar = (props) => {
         monthNames,
         holidays,
         updateHolidays,
-        handleButtonClick
+        handleButtonClick,
+        handleOptionChange
     } = props;
 
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -83,7 +87,6 @@ const GenerateMonthlyCalendar = (props) => {
                 onClick={() => handleDateClick(day, currentMonth, currentYear)}
             >
                 <span id='day'>{day}</span>
-                {/* {day} */}
             </td>
         );
 
@@ -131,9 +134,14 @@ const GenerateMonthlyCalendar = (props) => {
                 </table>
             </div>
             <hr />
-            <div className="event-container">
-                <div className="date-and-day">{formattedSelectedDate}</div>
-                <div className="event-name">No Events</div>
+            <div className="right-container">
+                <div className='filter-container'>
+                    <FilterDropdown className='filter' handleOptionChange={handleOptionChange} />
+                </div>
+                <div className='event-container'>
+                    <div className="date-and-day">{formattedSelectedDate}</div>
+                    <div className="event-name">No Events</div>
+                </div>
             </div>
         </>
     );
