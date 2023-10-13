@@ -46,7 +46,6 @@ const MonthlyCalendar = () => {
     const updateHolidays = (newHoliday) => {
         // Clone the current holidays state and add the new holiday
         setHolidays([...holidays, newHoliday]);
-        console.log(holidays)
     }
 
     useEffect(() => {
