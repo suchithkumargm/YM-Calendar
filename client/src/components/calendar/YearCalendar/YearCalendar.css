@@ -43,14 +43,15 @@ h1 button {
 }
 
 .calendar-year {
-	margin-left: 45%;
+	min-width: 9rem;
+	margin-left: 42%;
 }
 
 .yearly-calendar {
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
-	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: 0 1rem;
 }
 
 .month {
@@ -60,7 +61,7 @@ h1 button {
 .month h2 {
 	margin-left: 0.6rem;
 	margin-top: 0;
-	margin-bottom: 0.1rem;
+	margin-bottom: 0.5rem;
 	font-size: 1.0rem;
 	line-height: 1rem;
 	letter-spacing: 0em;
@@ -91,44 +92,4 @@ th {
 #today-date {
 	color: var(--primary-color);
 	border: 1px solid var(--primary-color);
-}
-
-@media (max-width: 1000px) {
-	.inner-container {
-		height: auto;
-	}
-
-	.yearly-calendar {
-		grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
-	}
-
-	.month h2 {
-		font-size: 1rem;
-	}
-	.filter{
-		position: inherit;
-	}
-}
-
-@media (max-width: 900px) {
-	.inner-container {
-		width: 90%;
-	}
-
-	.yearly-calendar {
-		grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-	}
-
-	.month h2 {
-		font-size: 1rem;
-	}
-}
-
-@media (max-width: 600px) {
-	.inner-container {
-		width: 90%;
-	}
-	.yearly-calendar {
-		grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
-	}
 }
